@@ -1,0 +1,59 @@
+{
+  "title": "Telegram Web",
+  "login": {
+    "fields": {
+      "email": "E-mail",
+      "password": "Password"
+    },
+    "buttons": {
+      "loging": "Loading...",
+      "login": "Sign In",
+      "register": "Sign Up"
+    },
+    "yup": {
+      "email": {
+        "valid": "Enter a valid email",
+        "required": "Email is required"
+      },
+      "password": {
+        "length": "Password must be at least 6 characters",
+        "required": "Password is required"
+      }
+    },
+    "toast": {
+      "success": "Logged in successfully!",
+      "error": "Failed to log in. Please check your credentials and try again."
+    }
+  },
+  "register": {
+    "title": "Sign Up",
+    "fields": {
+      "email": "E-mail",
+      "password": "Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "buttons": {
+      "registering": "Loading...",
+      "backToLogin": "Return",
+      "register": "Sign Up"
+    },
+    "yup": {
+      "email": {
+        "valid": "Enter a valid email",
+        "required": "Email is required"
+      },
+      "password": {
+        "length": "Password must be at least 6 characters",
+        "required": "Password is required"
+      },
+      "confirmPassword": {
+        "equal": "Passwords must match",
+        "required": "Please confirm your password"
+      }
+    },
+    "toast": {
+      "success": "Registered successfully!",
+      "error": "Failed to register. Please check your information and try again."
+    }
+  }
+}

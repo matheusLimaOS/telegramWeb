@@ -1,0 +1,59 @@
+{
+  "title": "Telegram Web",
+  "login": {
+    "fields": {
+      "email": "E-mail",
+      "password": "Senha"
+    },
+    "buttons": {
+      "loging": "Entrando...",
+      "login": "Entrar",
+      "register": "Cadastrar"
+    },
+    "yup": {
+      "email": {
+        "valid": "Digite um email válido",
+        "required": "O email é obrigatório"
+      },
+      "password": {
+        "length": "A senha deve ter no mínimo 6 caracteres",
+        "required": "A senha é obrigatória"
+      }
+    },
+    "toast": {
+      "success": "Login realizado com sucesso!",
+      "error": "Falha ao entrar. Por favor, verifique suas credenciais e tente novamente."
+    }
+  },
+  "register": {
+    "title": "Cadastre-se",
+    "fields": {
+      "email": "E-mail",
+      "password": "Senha",
+      "confirmPassword": "Confirme a senha"
+    },
+    "buttons": {
+      "registering": "Cadastrando...",
+      "backToLogin": "Voltar para o Login",
+      "register": "Cadastrar"
+    },
+    "yup": {
+      "email": {
+        "valid": "Digite um email válido",
+        "required": "O email é obrigatório"
+      },
+      "password": {
+        "length": "A senha deve ter no mínimo 6 caracteres",
+        "required": "A senha é obrigatória"
+      },
+      "confirmPassword": {
+        "equal": "Senhas devem ser iguais",
+        "required": "Por favor, confirme sua senha"
+      }
+    },
+    "toast": {
+      "success": "Cadastro realizado com sucesso!",
+      "error": "Falha ao cadastrar. Por favor, verifique suas informações e tente novamente."
+    }
+  }
+}
