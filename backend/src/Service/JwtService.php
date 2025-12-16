@@ -31,7 +31,12 @@ class JwtService
             ->expiresAt($now->modify('+1 hour'));
 
         foreach ($claims as $key => $value) {
-            $token = $token->withClaim($key, $value);
+            if ('sub' === $key) {
+                $token = $token->relatedTo((string) $value)
+                ;
+            } else {
+                $token = $token->withClaim($key, $value);
+            }
         }
 
         return $token->getToken(

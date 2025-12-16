@@ -10,6 +10,7 @@ use App\Service\JwtService;
 use App\Service\RefreshTokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -17,9 +18,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class SecurityController extends AbstractController
 {
+    private const REFRESH_TOKEN_TTL = 604800;
+
     #[Route(path: '/login', name: 'app_login', methods: ['POST'])]
     public function login(
         Request $request,
+        // Response $response,
         UserRepository $userRepository,
         UserPasswordHasherInterface $passwordHasher,
         JwtService $jwtService,
@@ -38,8 +42,7 @@ class SecurityController extends AbstractController
         }
 
         $token = $jwtService->generate([
-            'id' => $user->getId(),
-            'email' => $user->getEmail(),
+            'sub' => $user->getId(),
         ]);
 
         $refreshToken = new RefreshToken();
@@ -52,10 +55,25 @@ class SecurityController extends AbstractController
         $em->persist($refreshToken);
         $em->flush();
 
-        return $this->json([
+        $response = $this->json([
             'accessToken' => $token,
-            'refreshToken' => $refreshToken->getToken(),
         ]);
+
+        $response->headers->setCookie(
+            new Cookie(
+                'X-Refresh-Token',
+                $refreshToken->getToken(),
+                (new \DateTime())->add(new \DateInterval('PT'.self::REFRESH_TOKEN_TTL.'S')),
+                '/',
+                null,
+                true,
+                true,
+                false,
+                Cookie::SAMESITE_STRICT
+            )
+        );
+
+        return $response;
     }
 
     #[Route('/refresh', methods: ['POST'])]
@@ -97,10 +115,25 @@ class SecurityController extends AbstractController
             'userId' => $refreshTokenDB->getUser()->getId(),
         ]);
 
-        return $this->json([
+        $response = $this->json([
             'accessToken' => $newAccessToken,
-            'refreshToken' => $newRefreshToken->getToken(),
         ]);
+
+        $response->headers->setCookie(
+            new Cookie(
+                'X-Refresh-Token',
+                $newRefreshToken->getToken(),
+                (new \DateTime())->add(new \DateInterval('PT'.self::REFRESH_TOKEN_TTL.'S')),
+                '/',
+                null,
+                true,
+                true,
+                false,
+                Cookie::SAMESITE_STRICT
+            )
+        );
+
+        return $response;
     }
 
     #[Route(path: '/create-user', name: 'create-user', methods: ['POST'])]

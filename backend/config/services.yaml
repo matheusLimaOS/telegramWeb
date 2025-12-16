@@ -2,10 +2,17 @@ parameters:
 
 services:
     _defaults:
-        autowire: true # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
     App\:
         resource: "../src/"
-    App\EventListener\JwtRequestListener:
+    App\EventListener\WebhookRequestListener:
         tags:
-            - { name: kernel.event_listener, event: kernel.request }
+            - {
+                  name: kernel.event_listener,
+                  event: kernel.request,
+                  priority: 10,
+              }
+    App\EventSubscriber\IntegrationAuditSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }

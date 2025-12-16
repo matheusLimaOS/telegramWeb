@@ -14,9 +14,11 @@ class BasicController extends AbstractController
         return $this->json(['pong' => true]);
     }
 
-    #[Route('/test', methods: ['POST'])]
+    #[Route('/api/test', methods: ['POST'])]
     public function testPost(): JsonResponse
     {
-        return $this->json(['status' => 'success']);
+        $user = $this->getUser();
+
+        return $this->json(['status' => 'success', 'user' => $user]);
     }
 }

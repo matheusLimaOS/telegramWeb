@@ -31,14 +31,11 @@ createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <Header />
-
-        {/* 2. Adicione um espaçador para evitar que o conteúdo fique atrás do Header */}
-        {/* O Toolbar do MUI é uma forma comum de garantir o espaçamento correto */}
         <Toolbar />
         <CssBaseline />
         <ToastContainer
           position="top-right"
-          autoClose={3000} // fecha automaticamente em 3s
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop
           closeOnClick
