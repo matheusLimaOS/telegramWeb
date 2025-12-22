@@ -9,12 +9,11 @@ import * as Yup from 'yup'
 import ButtonWrapper from '../../components/ButtonWrapper'
 import ContainerWrapper from '../../components/ContainerWrapper'
 import FormWrapper from '../../components/FormWrapper'
-import { api } from '../../services/api'
+import api from '../../services/api'
 
 const defaultValues = {
   email: '',
   password: '',
-  confirmPassword: '',
 }
 
 interface newUserData {

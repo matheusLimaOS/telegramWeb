@@ -6,13 +6,3 @@ services:
         autoconfigure: true
     App\:
         resource: "../src/"
-    App\EventListener\WebhookRequestListener:
-        tags:
-            - {
-                  name: kernel.event_listener,
-                  event: kernel.request,
-                  priority: 10,
-              }
-    App\EventSubscriber\IntegrationAuditSubscriber:
-        tags:
-            - { name: doctrine.event_subscriber }
